@@ -1,6 +1,5 @@
 //
-//  WeatherConstants.swift
-//  WeatherApp
+//  AppConstants.swift
 //
 //  Created by Mehdi on 25/9/19.
 //  Copyright © 2019 Mehdi. All rights reserved.
@@ -11,7 +10,6 @@ enum ApiType: String {
     case search
 }
 class AppConstants {
-    static var enableMockData: Bool = false
     //To-Do:- get the API Key from remote
     static var apiKey: String = "?key=f0b519ce0060402796a40014192509"
     static var baseAPI: String = "http://api.worldweatheronline.com/premium/v1/"
