@@ -11,6 +11,8 @@ class RequestManager: NSObject {
     fileprivate func getRequest(_ url: URL, timeoutInterval: TimeInterval = RequestManager.defaultTimeoutInterval) -> NSMutableURLRequest {
         let theRequest = NSMutableURLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: timeoutInterval)
         theRequest.addValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+        theRequest.addValue("contextualwebsearch-websearch-v1.p.rapidapi.com", forHTTPHeaderField: "x-rapidapi-host")
+        theRequest.addValue(AppConstants.apiKey, forHTTPHeaderField: "x-rapidapi-key")
         theRequest.httpMethod = "GET"
         return theRequest
     }

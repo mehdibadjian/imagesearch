@@ -4,17 +4,22 @@
 //  Created by Mehdi on 25/9/19.
 //  Copyright © 2019 Mehdi. All rights reserved.
 //
-struct ApiManager {
-    static func getPathFromURLString(_ urlString: String) -> String {
-        let temp = urlString.replacingOccurrences(of: AppConstants.baseAPI, with: "")
-        return temp
+struct Query {
+    var query: String
+    var pageNumber: String
+    var pageSize: String
+    init(query: String, pageNumber: String, pageSize: String) {
+        self.query = query
+        self.pageNumber = pageNumber
+        self.pageSize = pageSize
     }
 }
-enum API: String {
-    case query = "&q="
-    static func urlString(api: API, queryString: String? = nil, apiType: ApiType) -> String {
-        let apiType: String  = String(format: "%@.ashx", apiType.rawValue)
-        return String(format: "%@%@%@%@%@%@format=json", AppConstants.baseAPI, apiType, AppConstants.apiKey, api.rawValue, queryString?.urlCompatible ?? "", AppConstants.atSign)
+struct ApiManager {
+    fileprivate static func getEndPoints(_ query: Query) -> String {
+        return query.query + AppConstants.atSign + AppConstants.pageNumber + query.pageNumber + AppConstants.pageSize + query.pageSize
+    }
+    static func urlString(_ query: Query) -> String {
+        return AppConstants.baseAPI + getEndPoints(query)
     }
 }
 
