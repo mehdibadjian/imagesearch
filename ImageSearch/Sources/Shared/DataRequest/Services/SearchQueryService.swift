@@ -10,10 +10,22 @@ class SearchQueryService: RequestManager {
         super.init()
         self.session = urlSession
     }
-    func enquiry(_ query: Query, successBlock: @escaping (([AnyHashable: Any]?) -> Void), failureBlock: @escaping ((NSError?) -> Void)) {
+    func enquiry(_ query: Query, successBlock: @escaping ((Codable?) -> Void), failureBlock: @escaping ((NSError?) -> Void)) {
         self.get(urlString: ApiManager.urlString(query)) { (success, response, error) in
             if success {
-                successBlock(response)
+                if let enquiry = response {
+                    if let jsonData = try? JSONSerialization.data( withJSONObject: enquiry, options: .prettyPrinted) {
+                        if let responseModel = try? JSONDecoder().decode(QueryResponseModel.self, from: jsonData) {
+                            successBlock(responseModel)
+                        } else {
+                            failureBlock(error)
+                        }
+                    } else {
+                        failureBlock(error)
+                    }
+                } else {
+                    failureBlock(error)
+                }
             } else {
                 failureBlock(error)
             }

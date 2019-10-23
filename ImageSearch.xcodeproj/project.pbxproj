@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		91710F3A2360A7C900917F5E /* QueryResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91710F392360A7C900917F5E /* QueryResponseModel.swift */; };
+		91710F3C2360AB7F00917F5E /* query.json in Resources */ = {isa = PBXBuildFile; fileRef = 91710F3B2360AB7F00917F5E /* query.json */; };
 		91CE09462360851B00E93643 /* SearchQueryServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CE09452360851B00E93643 /* SearchQueryServiceTest.swift */; };
 		91CE09482360863300E93643 /* MockURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CE09472360863300E93643 /* MockURLSession.swift */; };
 		91FB597423607C2600311B97 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FB596A23607C2500311B97 /* AppDelegate.swift */; };
@@ -37,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		91710F392360A7C900917F5E /* QueryResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryResponseModel.swift; sourceTree = "<group>"; };
+		91710F3B2360AB7F00917F5E /* query.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = query.json; sourceTree = "<group>"; };
 		91CE09452360851B00E93643 /* SearchQueryServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchQueryServiceTest.swift; sourceTree = "<group>"; };
 		91CE09472360863300E93643 /* MockURLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLSession.swift; sourceTree = "<group>"; };
 		91FB594423607BE500311B97 /* ImageSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,9 +82,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		91710F372360A7AC00917F5E /* Landing */ = {
+			isa = PBXGroup;
+			children = (
+				91710F382360A7B900917F5E /* ResponseModel */,
+			);
+			path = Landing;
+			sourceTree = "<group>";
+		};
+		91710F382360A7B900917F5E /* ResponseModel */ = {
+			isa = PBXGroup;
+			children = (
+				91710F392360A7C900917F5E /* QueryResponseModel.swift */,
+			);
+			path = ResponseModel;
+			sourceTree = "<group>";
+		};
 		91CE09492360866A00E93643 /* ServiceTests */ = {
 			isa = PBXGroup;
 			children = (
+				91710F3B2360AB7F00917F5E /* query.json */,
 				91CE09452360851B00E93643 /* SearchQueryServiceTest.swift */,
 			);
 			path = ServiceTests;
@@ -156,6 +177,7 @@
 		91FB596B23607C2500311B97 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				91710F372360A7AC00917F5E /* Landing */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -317,6 +339,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				91710F3C2360AB7F00917F5E /* query.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,6 +350,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				91710F3A2360A7C900917F5E /* QueryResponseModel.swift in Sources */,
 				91FB597423607C2600311B97 /* AppDelegate.swift in Sources */,
 				91FB599623607C7A00311B97 /* BaseViewModel.swift in Sources */,
 				91FB599A23607C7A00311B97 /* StringExtension.swift in Sources */,

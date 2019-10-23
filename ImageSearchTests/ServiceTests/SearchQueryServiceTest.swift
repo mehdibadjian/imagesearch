@@ -11,7 +11,18 @@ class SearchQueryServiceTest: XCTestCase {
     var queryService: SearchQueryService!
     var mockURLSession: MockURLSession!
     override func setUp() {
-        mockURLSession = MockURLSession()
+        let bundle = Bundle.init(for: SearchQueryServiceTest.self)
+        if let path = bundle.path(forResource: "query", ofType: "json") {
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+                let response = HTTPURLResponse(url: URL(string: "http://test.com")!, statusCode: 200, httpVersion: nil, headerFields: nil)
+                mockURLSession = MockURLSession(data: data, response: response, error: nil)
+            } catch {
+                mockURLSession = MockURLSession()
+            }
+        } else {
+            mockURLSession = MockURLSession()
+        }
         queryService = SearchQueryService(mockURLSession)
     }
     override func tearDown() {
@@ -26,10 +37,14 @@ class SearchQueryServiceTest: XCTestCase {
     func testEnquiryService() {
         var promise = expectation(description: "Request is not nill and has expected URL")
         queryService?.enquiry( Query(query: "Test", pageNumber: "1", pageSize: "10"), successBlock: { (response) in
+            if let responseModel = response as? QueryResponseModel {
+                XCTAssertNotNil(responseModel)
+                XCTAssertEqual(responseModel.value.count,10)
+            }
             self.fulfillBlock(&promise)
         }, failureBlock: { (_) in
             self.fulfillBlock(&promise)
         })
-        wait(for: [promise], timeout: 1)
+        wait(for: [promise], timeout: 2)
     }
 }
