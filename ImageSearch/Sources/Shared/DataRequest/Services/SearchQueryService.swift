@@ -6,6 +6,10 @@
 //
 import UIKit
 class SearchQueryService: RequestManager {
+    init(_ urlSession: URLSession) {
+        super.init()
+        self.session = urlSession
+    }
     func enquiry(_ query: Query, successBlock: @escaping (([AnyHashable: Any]?) -> Void), failureBlock: @escaping ((NSError?) -> Void)) {
         self.get(urlString: ApiManager.urlString(query)) { (success, response, error) in
             if success {

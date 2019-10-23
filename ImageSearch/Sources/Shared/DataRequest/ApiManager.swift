@@ -16,7 +16,7 @@ struct Query {
 }
 struct ApiManager {
     fileprivate static func getEndPoints(_ query: Query) -> String {
-        return query.query + AppConstants.atSign + AppConstants.pageNumber + query.pageNumber + AppConstants.pageSize + query.pageSize
+        return query.query + AppConstants.atSign + AppConstants.pageNumber + query.pageNumber + AppConstants.atSign + AppConstants.pageSize + query.pageSize
     }
     static func urlString(_ query: Query) -> String {
         return AppConstants.baseAPI + getEndPoints(query)

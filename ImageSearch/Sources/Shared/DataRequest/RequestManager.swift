@@ -6,13 +6,14 @@
 //
 import Foundation
 class RequestManager: NSObject {
-    static let sharedInstance = RequestManager()
+    var session: URLSession? = nil
     static var defaultTimeoutInterval: TimeInterval = 30
     fileprivate func getRequest(_ url: URL, timeoutInterval: TimeInterval = RequestManager.defaultTimeoutInterval) -> NSMutableURLRequest {
         let theRequest = NSMutableURLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: timeoutInterval)
-        theRequest.addValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
-        theRequest.addValue("contextualwebsearch-websearch-v1.p.rapidapi.com", forHTTPHeaderField: "x-rapidapi-host")
-        theRequest.addValue(AppConstants.apiKey, forHTTPHeaderField: "x-rapidapi-key")
+        let header: [String: String] = ["Content-Type": "application/json; charset=utf-8",
+                                          "x-rapidapi-host": AppConstants.host,
+                                          "x-rapidapi-key": AppConstants.apiKey]
+        theRequest.allHTTPHeaderFields = header
         theRequest.httpMethod = "GET"
         return theRequest
     }
@@ -29,10 +30,12 @@ class RequestManager: NSObject {
         return session
     }
     func get(urlString: String,
-             completion: @escaping (Bool, [AnyHashable: Any]?, NSError?) -> Void ) {
+             completion: @escaping (Bool, [AnyHashable: Any]?, NSError?) -> Void) {
         if let url = URL(string: urlString) {
-            let session = self.session(url)
-            session.dataTask(with: self.getRequest(url) as URLRequest,
+            if session == nil {
+                session = self.session(url)
+            }
+            session?.dataTask(with: self.getRequest(url) as URLRequest,
                              completionHandler: {(data, response, error) in
                                 if data != nil {
                                     if let json = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [AnyHashable: Any] {
@@ -58,7 +61,7 @@ class RequestManager: NSObject {
         }
     }
     func handleResponse(_ url: URL, response: [AnyHashable: Any]?) -> ([AnyHashable: Any]?, NSError?) {
-        fatalError("overrite this function")
+        return (response, nil)
     }
     func updateSession(_ url: URL, response: [AnyHashable: Any]?) {
         fatalError("overrite this function")
