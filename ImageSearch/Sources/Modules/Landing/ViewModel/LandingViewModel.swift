@@ -29,13 +29,16 @@ class LandingViewModel: BaseViewModel {
         handleEmptyState()
     }
     func onQuery(_ queryString: String, urlSession: URLSession? = nil) {
-        guard !loading else {
+        guard !loading, !queryString.isEmpty else {
             return
         }
         if let storedData = LocalStorageManager.sharedInstance.getStoredValuesFor(key: queryString) as? Data {
             do {
                 let responseModel = try JSONDecoder().decode(QueryResponseModel.self, from: storedData)
-                dataModel = responseModel.value.map{ LandingModel(imageUrl: $0.image?.thumbnail, title: $0.title, shortDesc: $0.provider?.name, date: $0.datePublished) }
+                dataModel = responseModel.value.map { LandingModel(imageUrl: $0.image?.thumbnail,
+                                                                   title: $0.title?.htmlToString,
+                                                                   shortDesc: $0.provider?.name,
+                                                                   date: $0.datePublished) }
                 delegate?.onSuccess()
                 loading = false
             } catch let error {
@@ -45,7 +48,9 @@ class LandingViewModel: BaseViewModel {
             return
         }
         loading = true
-        let query = Query(query: queryString, pageNumber: AppConstants.defaultPageNumber, pageSize: AppConstants.defaultPageSize)
+        let query = Query(query: queryString,
+                          pageNumber: AppConstants.defaultPageNumber,
+                          pageSize: AppConstants.defaultPageSize)
         let queryService: SearchQueryService
         if let session = urlSession {
             queryService = SearchQueryService(session)
@@ -59,7 +64,11 @@ class LandingViewModel: BaseViewModel {
                     let jsonData = try JSONSerialization.data( withJSONObject: enquiry, options: .prettyPrinted)
                     LocalStorageManager.sharedInstance.storeValueFor(key: query.query, value: jsonData)
                     let responseModel = try JSONDecoder().decode(QueryResponseModel.self, from: jsonData)
-                    self.dataModel = responseModel.value.map{ LandingModel(imageUrl: $0.image?.thumbnail, title: $0.title, shortDesc: $0.provider?.name, date: $0.datePublished) }
+                    self.dataModel = responseModel.value.map {
+                        LandingModel(imageUrl: $0.image?.thumbnail,
+                                     title: $0.title?.htmlToString,
+                                     shortDesc: $0.provider?.name,
+                                     date: $0.datePublished) }
                     self.delegate?.onSuccess()
                     self.loading = false
                 } catch {
@@ -70,10 +79,10 @@ class LandingViewModel: BaseViewModel {
                 self.delegate?.onFailure(error: nil)
                 self.loading = false
             }
-        }) { (error) in
+        }, failureBlock: { (error) in
             self.loading = false
             self.delegate?.onFailure(error: error)
-        }
+        })
     }
     func getDataModel() -> [Any] {
         if !dataModel.isEmpty {
@@ -88,12 +97,13 @@ class LandingViewModel: BaseViewModel {
     func cellForRow(cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let tableView = scrollView as? UITableView {
             if !dataModel.isEmpty {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "LandingTableViewCell", for: indexPath) as! LandingTableViewCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "LandingTableViewCell",
+                                                         for: indexPath) as? LandingTableViewCell
                 let model = dataModel[indexPath.row]
-                cell.iconView.load(urlString: model.imageUrl, placeholder: #imageLiteral(resourceName: "image-placeholder.jpg"))
-                cell.titleLabel.text = model.title
-                cell.subtitleLabel.text = model.shortDesc
-                return cell
+                cell?.iconView.load(urlString: model.imageUrl, placeholder: #imageLiteral(resourceName: "image-placeholder.jpg"))
+                cell?.titleLabel.text = model.title
+                cell?.subtitleLabel.text = model.shortDesc
+                return cell!
             } else if !searchHistoryModel.isEmpty {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
                 cell.textLabel?.text = searchHistoryModel[indexPath.row]

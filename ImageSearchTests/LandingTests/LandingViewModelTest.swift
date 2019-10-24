@@ -21,7 +21,10 @@ class LandingViewModelTest: XCTestCase {
         if let path = bundle.path(forResource: "query", ofType: "json") {
             do {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-                let response = HTTPURLResponse(url: URL(string: "http://test.com")!, statusCode: 200, httpVersion: nil, headerFields: nil)
+                let response = HTTPURLResponse(url: URL(string: "http://test.com")!,
+                                               statusCode: 200,
+                                               httpVersion: nil,
+                                               headerFields: nil)
                 mockURLSession = MockURLSession(data: data, response: response, error: nil)
             } catch {
                 mockURLSession = MockURLSession()

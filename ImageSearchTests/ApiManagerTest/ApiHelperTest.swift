@@ -9,8 +9,10 @@ import XCTest
 @testable import ImageSearch
 class ApiHelperTest: XCTestCase {
     func testApiHelper() {
-        let query = Query(query: "test", pageNumber: AppConstants.defaultPageNumber, pageSize: AppConstants.defaultPageSize)
+        let query = Query(query: "test", pageNumber: AppConstants.defaultPageNumber,
+                          pageSize: AppConstants.defaultPageSize)
         XCTAssertNotNil(ApiManager.urlString(query))
-        XCTAssertEqual(ApiManager.urlString(query), "https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/WebSearchAPI?q=test&pageNumber=1&pageSize=10")
+        let expectedUrl =  "https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/WebSearchAPI?q=test&pageNumber=1&pageSize=10"
+        XCTAssertEqual(ApiManager.urlString(query), expectedUrl)
     }
 }
