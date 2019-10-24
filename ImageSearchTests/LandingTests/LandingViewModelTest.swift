@@ -13,9 +13,11 @@ class LandingViewModelTest: XCTestCase {
     var queryPromise: XCTestExpectation!
     override func setUp() {
         let tableView = UITableView()
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
+        var bundle = Bundle.init(for: LandingTableViewCell.self)
+        let nib = UINib(nibName: "LandingTableViewCell", bundle: bundle)
+        tableView.register(nib, forCellReuseIdentifier: "LandingTableViewCell")
         viewModel = LandingViewModel(self, scrollView: tableView)
-        let bundle = Bundle.init(for: SearchQueryServiceTest.self)
+        bundle = Bundle.init(for: SearchQueryServiceTest.self)
         if let path = bundle.path(forResource: "query", ofType: "json") {
             do {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
