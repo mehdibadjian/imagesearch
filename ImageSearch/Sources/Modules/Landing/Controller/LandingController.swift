@@ -20,6 +20,7 @@ class LandingController: BaseViewController {
             let bundle = Bundle(for: type(of: self))
             let nib = UINib(nibName: "LandingTableViewCell", bundle: bundle)
             tableView.register(nib, forCellReuseIdentifier: "LandingTableViewCell")
+            tableView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
             tableView.rowHeight = UITableView.automaticDimension
             tableView.estimatedRowHeight = 100
         }

@@ -9,27 +9,36 @@ class LocalStorageManager {
     var defaults: UserDefaults? = UserDefaults.standard
     static let sharedInstance = LocalStorageManager()
     func getStoredValuesFor(key: String) -> Any? {
-        return defaults?.value(forKey: key)
-    }
-    func storeValueFor(key: String, value: String) {
-        if let storedValue = defaults?.value(forKey: key) {
-            switch storedValue {
-            case is [String]:
-                if var valueArray = storedValue as? [String] {
-                    if let index = valueArray.firstIndex(of: value) {
-                        valueArray.remove(at: index)
-                    }
-                    valueArray.insert(value, at: 0)
-                    defaults?.set(valueArray, forKey: key)
-                }
-            default: break
-            }
+        if let searchHistory = defaults?.value(forKey: AppConstants.searchHistoryKey) as? [AnyHashable: Any], searchHistory.keys.contains(key) {
+            return searchHistory[key]
         } else {
-            let valueArray = [value]
-            defaults?.set(valueArray, forKey: key)
+            return nil
+        }
+    }
+    func getAllStoredData() -> NSDictionary? {
+        if let searchHistory = defaults?.value(forKey: AppConstants.searchHistoryKey) as? [AnyHashable: Any] {
+            return searchHistory as? NSDictionary
+        } else {
+            return nil
+        }
+    }
+    func storeValueFor(key: String, value: Data) {
+        if var searchHistory = defaults?.value(forKey: AppConstants.searchHistoryKey) as? [AnyHashable: Any], searchHistory.keys.contains(key) {
+            searchHistory.updateValue(value, forKey: key)
+            defaults?.set(searchHistory, forKey: AppConstants.searchHistoryKey)
+            defaults?.synchronize()
+        } else if var searchHistory = defaults?.value(forKey: AppConstants.searchHistoryKey) as? [AnyHashable: Any] {
+            searchHistory[key] = value
+            defaults?.set(searchHistory, forKey: AppConstants.searchHistoryKey)
+            defaults?.synchronize()
+        } else {
+            let historyObj: [AnyHashable: Any] = [key: value]
+            defaults?.set(historyObj, forKey: AppConstants.searchHistoryKey)
+            defaults?.synchronize()
         }
     }
     func resetStorage(key: String) {
-        defaults?.set(nil, forKey: key)
+        defaults?.set(nil, forKey: AppConstants.searchHistoryKey)
+        defaults?.synchronize()
     }
 }
