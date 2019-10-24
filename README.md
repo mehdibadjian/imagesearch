@@ -12,4 +12,4 @@ Open the workspace with xCode 10.1 or above in master branch and run the app.
 
 ### Copyrights
 
-All contents of the app is Copyrights to @ Mehdi Badjian hence using fully or partially of the app should be informed to the owner.
+All contents of the app is Copyrighted to @ Mehdi Badjian hence using fully or partially of the app should be informed to the owner.
