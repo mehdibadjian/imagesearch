@@ -38,6 +38,7 @@ extension LandingController: UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        presentImage(indexPath: indexPath)
     }
 }
 extension LandingController: UISearchBarDelegate {
@@ -48,5 +49,28 @@ extension LandingController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         viewModel.onQuery(searchBar.text ?? "")
         searchBar.resignFirstResponder()
+    }
+}
+extension LandingController {
+    func presentImage(indexPath: IndexPath) {
+        let imageView = UIImageView(image: #imageLiteral(resourceName: "image-placeholder.jpg"))
+        imageView.contentMode = .scaleAspectFit
+        self.view.addSubview(imageView)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addConstraints([
+            NSLayoutConstraint(item: imageView, attribute: .width, relatedBy: .equal, toItem:  self.view, attribute: .width, multiplier: 1.0, constant: 0),
+            NSLayoutConstraint(item: imageView, attribute: .height, relatedBy: .equal, toItem:  self.view, attribute: .height, multiplier: 1.0, constant: 0),
+            NSLayoutConstraint(item: imageView, attribute: .centerX, relatedBy: .equal, toItem: self.view, attribute: .centerX, multiplier: 1.0, constant: 0),
+            NSLayoutConstraint(item: imageView, attribute: .centerY, relatedBy: .equal, toItem: self.view, attribute: .centerY, multiplier: 1.0, constant: 0),
+            ])
+        imageView.load(urlString: viewModel.imageForRow(indexPath), placeholder: #imageLiteral(resourceName: "image-placeholder.jpg"))
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(_:)))
+        imageView.isUserInteractionEnabled = true
+        imageView.addGestureRecognizer(tapGestureRecognizer)
+    }
+    @objc func imageTapped(_ sender: UITapGestureRecognizer) {
+        if let imageView = sender.view as? UIImageView {
+            imageView.removeFromSuperview()
+        }
     }
 }

@@ -106,6 +106,10 @@ class LandingViewModel: BaseViewModel {
             return UITableViewCell()
         }
     }
+    func imageForRow(_ indexPath: IndexPath) -> String? {
+        let model = dataModel[indexPath.row]
+        return model.imageUrl
+    }
     func handleEmptyState() {
         if getDataModel().isEmpty {
             scrollView.showEmptyListMessage(emptyStateString)
