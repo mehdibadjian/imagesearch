@@ -12,7 +12,9 @@ class LandingViewModelTest: XCTestCase {
     var mockURLSession: MockURLSession!
     var queryPromise: XCTestExpectation!
     override func setUp() {
-        viewModel = LandingViewModel(self)
+        let tableView = UITableView()
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
+        viewModel = LandingViewModel(self, scrollView: tableView)
         let bundle = Bundle.init(for: SearchQueryServiceTest.self)
         if let path = bundle.path(forResource: "query", ofType: "json") {
             do {
@@ -33,7 +35,7 @@ class LandingViewModelTest: XCTestCase {
     }
     func testOnQuery() {
         queryPromise = expectation(description: "viewmodel has a datamodel with objects")
-        viewModel.onQuery(Query(query: "Test", pageNumber: "1", pageSize: "10"), urlSession: mockURLSession)
+        viewModel.onQuery("Test", urlSession: mockURLSession)
         wait(for: [queryPromise], timeout: 1)
     }
 }
@@ -41,6 +43,8 @@ extension LandingViewModelTest: ViewModelDelegate {
     func onSuccess() {
         XCTAssertNotNil(viewModel.getDataModel())
         XCTAssertEqual(viewModel.getDataModel().count, 10)
+        XCTAssertEqual(viewModel.numberOfRows(), 10)
+        XCTAssertNotNil(viewModel.cellForRow(cellForRowAt: IndexPath(row: 0, section: 0)))
         queryPromise.fulfill()
     }
     func onFailure(error: Error?) {

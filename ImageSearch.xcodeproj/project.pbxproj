@@ -12,6 +12,10 @@
 		91710F3F2360B07F00917F5E /* LandingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91710F3E2360B07F00917F5E /* LandingViewModel.swift */; };
 		91710F4223613DEE00917F5E /* LandingViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91710F4123613DEE00917F5E /* LandingViewModelTest.swift */; };
 		91710F452361419A00917F5E /* LandingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91710F442361419A00917F5E /* LandingModel.swift */; };
+		91710F482361434500917F5E /* LandingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91710F472361434500917F5E /* LandingController.swift */; };
+		91710F4A2361435F00917F5E /* LandingControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91710F492361435F00917F5E /* LandingControllerExtension.swift */; };
+		91710F4F23615EA400917F5E /* ApiHelperTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91710F4C23615EA400917F5E /* ApiHelperTest.swift */; };
+		91710F5023615EA400917F5E /* StorageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91710F4E23615EA400917F5E /* StorageTest.swift */; };
 		91CE09462360851B00E93643 /* SearchQueryServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CE09452360851B00E93643 /* SearchQueryServiceTest.swift */; };
 		91CE09482360863300E93643 /* MockURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CE09472360863300E93643 /* MockURLSession.swift */; };
 		91FB597423607C2600311B97 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FB596A23607C2500311B97 /* AppDelegate.swift */; };
@@ -47,6 +51,10 @@
 		91710F3E2360B07F00917F5E /* LandingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingViewModel.swift; sourceTree = "<group>"; };
 		91710F4123613DEE00917F5E /* LandingViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingViewModelTest.swift; sourceTree = "<group>"; };
 		91710F442361419A00917F5E /* LandingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingModel.swift; sourceTree = "<group>"; };
+		91710F472361434500917F5E /* LandingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingController.swift; sourceTree = "<group>"; };
+		91710F492361435F00917F5E /* LandingControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingControllerExtension.swift; sourceTree = "<group>"; };
+		91710F4C23615EA400917F5E /* ApiHelperTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiHelperTest.swift; sourceTree = "<group>"; };
+		91710F4E23615EA400917F5E /* StorageTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageTest.swift; sourceTree = "<group>"; };
 		91CE09452360851B00E93643 /* SearchQueryServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchQueryServiceTest.swift; sourceTree = "<group>"; };
 		91CE09472360863300E93643 /* MockURLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLSession.swift; sourceTree = "<group>"; };
 		91FB594423607BE500311B97 /* ImageSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -91,6 +99,7 @@
 		91710F372360A7AC00917F5E /* Landing */ = {
 			isa = PBXGroup;
 			children = (
+				91710F462361432A00917F5E /* Controller */,
 				91710F432361418400917F5E /* Model */,
 				91710F3D2360B02500917F5E /* ViewModel */,
 				91710F382360A7B900917F5E /* ResponseModel */,
@@ -128,6 +137,31 @@
 				91710F442361419A00917F5E /* LandingModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		91710F462361432A00917F5E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				91710F472361434500917F5E /* LandingController.swift */,
+				91710F492361435F00917F5E /* LandingControllerExtension.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		91710F4B23615EA400917F5E /* ApiManagerTest */ = {
+			isa = PBXGroup;
+			children = (
+				91710F4C23615EA400917F5E /* ApiHelperTest.swift */,
+			);
+			path = ApiManagerTest;
+			sourceTree = "<group>";
+		};
+		91710F4D23615EA400917F5E /* StorageTest */ = {
+			isa = PBXGroup;
+			children = (
+				91710F4E23615EA400917F5E /* StorageTest.swift */,
+			);
+			path = StorageTest;
 			sourceTree = "<group>";
 		};
 		91CE09492360866A00E93643 /* ServiceTests */ = {
@@ -178,8 +212,10 @@
 			isa = PBXGroup;
 			children = (
 				91FB595E23607BE700311B97 /* Info.plist */,
+				91710F4B23615EA400917F5E /* ApiManagerTest */,
 				91710F4023613DD800917F5E /* LandingTests */,
 				91CE09492360866A00E93643 /* ServiceTests */,
+				91710F4D23615EA400917F5E /* StorageTest */,
 			);
 			path = ImageSearchTests;
 			sourceTree = "<group>";
@@ -383,9 +419,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				91710F4A2361435F00917F5E /* LandingControllerExtension.swift in Sources */,
 				91710F3A2360A7C900917F5E /* QueryResponseModel.swift in Sources */,
 				91FB597423607C2600311B97 /* AppDelegate.swift in Sources */,
 				91FB599623607C7A00311B97 /* BaseViewModel.swift in Sources */,
+				91710F482361434500917F5E /* LandingController.swift in Sources */,
 				91FB599A23607C7A00311B97 /* StringExtension.swift in Sources */,
 				91FB599123607C7A00311B97 /* SearchQueryService.swift in Sources */,
 				91FB598E23607C7A00311B97 /* ApiManager.swift in Sources */,
@@ -405,9 +443,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				91710F4F23615EA400917F5E /* ApiHelperTest.swift in Sources */,
 				91710F4223613DEE00917F5E /* LandingViewModelTest.swift in Sources */,
 				91CE09482360863300E93643 /* MockURLSession.swift in Sources */,
 				91CE09462360851B00E93643 /* SearchQueryServiceTest.swift in Sources */,
+				91710F5023615EA400917F5E /* StorageTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

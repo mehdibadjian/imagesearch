@@ -31,7 +31,7 @@ class SearchQueryServiceTest: XCTestCase {
     }
     fileprivate func fulfillBlock(_ promise: inout XCTestExpectation) {
         XCTAssertNotNil(self.mockURLSession.request)
-        XCTAssertEqual(self.mockURLSession.request?.url?.absoluteString, "https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/WebSearchAPI?Test&pageNumber=1&pageSize=10")
+        XCTAssertEqual(self.mockURLSession.request?.url?.absoluteString, "https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/WebSearchAPI?q=Test&pageNumber=1&pageSize=10")
         promise.fulfill()
     }
     func testEnquiryService() {

@@ -12,8 +12,11 @@ class AppConstants {
     static var host: String = "contextualwebsearch-websearch-v1.p.rapidapi.com"
     static var atSign: String = "&"
     static var pageNumber = "pageNumber="
+    static var defaultPageNumber = "1"
     static var pageSize = "pageSize="
+    static var defaultPageSize = "10"
     static var query = "q="
     static var loaderTag: Int = 1000
     static var maxHistoryCount: Int = 20
+    static var searchHistoryKey: String = "searchHistoryKey"
 }
