@@ -6,15 +6,6 @@
 //  Copyright © 2019 Mehdi. All rights reserved.
 //
 import UIKit
-extension LandingController {
-    func handleEmptyState() {
-        if viewModel.getDataModel().isEmpty {
-            tableView.showEmptyListMessage(viewModel.emptyStateString)
-        } else {
-            tableView.dismissEmptyListMessage()
-        }
-    }
-}
 extension LandingController: ViewModelDelegate {
     func loading(_ loading: Bool) {
         DispatchQueue.main.async {
@@ -26,12 +17,16 @@ extension LandingController: ViewModelDelegate {
         }
     }
     func onSuccess() {
-        handleEmptyState()
-        tableView.reloadData()
+        viewModel.handleEmptyState()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     func onFailure(error: Error?) {
-        handleEmptyState()
-        tableView.reloadData()
+        viewModel.handleEmptyState()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
 }
 extension LandingController: UITableViewDelegate, UITableViewDataSource {

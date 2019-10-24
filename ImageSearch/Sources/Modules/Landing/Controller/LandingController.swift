@@ -6,7 +6,7 @@
 //  Copyright © 2019 Mehdi. All rights reserved.
 //
 import UIKit
-class LandingController: UIViewController {
+class LandingController: BaseViewController {
     var viewModel: LandingViewModel!
     @IBOutlet weak var searchBar: UISearchBar! {
         didSet {
@@ -17,7 +17,11 @@ class LandingController: UIViewController {
         didSet {
             tableView.delegate = self
             tableView.dataSource = self
-            tableView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
+            let bundle = Bundle(for: type(of: self))
+            let nib = UINib(nibName: "LandingTableViewCell", bundle: bundle)
+            tableView.register(nib, forCellReuseIdentifier: "LandingTableViewCell")
+            tableView.rowHeight = UITableView.automaticDimension
+            tableView.estimatedRowHeight = 100
         }
     }
     var resultSearchController = UISearchController()
@@ -29,6 +33,5 @@ class LandingController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         viewModel = LandingViewModel(self, scrollView: tableView)
         viewModel.loadLocalData()
-        handleEmptyState()
     }
 }

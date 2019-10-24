@@ -6,9 +6,9 @@
 //  Copyright © 2019 Mehdi. All rights reserved.
 //
 struct QueryResponseModel: Codable {
-    let type, didUMean: String
-    let totalCount: Int
-    let relatedSearch: [String]
+    let type, didUMean: String?
+    let totalCount: Int?
+    let relatedSearch: [String]?
     let value: [Value]
     enum CodingKeys: String, CodingKey {
         case type = "_type"
@@ -17,14 +17,14 @@ struct QueryResponseModel: Codable {
 }
 // MARK: - Value
 struct Value: Codable {
-    let title: String
-    let url: String
-    let valueDescription, keywords: String
-    let language: String
-    let isSafe: Bool
-    let datePublished: String
-    let provider: Provider
-    let image: Image
+    let title: String?
+    let url: String?
+    let valueDescription, keywords: String?
+    let language: String?
+    let isSafe: Bool?
+    let datePublished: String?
+    let provider: Provider?
+    let image: Image?
     enum CodingKeys: String, CodingKey {
         case title, url
         case valueDescription = "description"
@@ -33,11 +33,11 @@ struct Value: Codable {
 }
 // MARK: - Image
 struct Image: Codable {
-    let url: String
-    let height, width: Int
-    let thumbnail: String
-    let thumbnailHeight, thumbnailWidth: Int
-    let base64Encoding: String
+    let url: String?
+    let height, width: Int?
+    let thumbnail: String?
+    let thumbnailHeight, thumbnailWidth: Int?
+    let base64Encoding: String?
 }
 // MARK: - Provider
 struct Provider: Codable {

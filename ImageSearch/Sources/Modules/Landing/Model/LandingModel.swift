@@ -9,11 +9,11 @@
 import UIKit
 
 struct LandingModel {
-    var imageUrl: String
-    var title: String
-    var shortDesc: String
-    var date: String
-    init(imageUrl: String, title: String, shortDesc: String, date: String) {
+    var imageUrl: String?
+    var title: String?
+    var shortDesc: String?
+    var date: String?
+    init(imageUrl: String?, title: String?, shortDesc: String?, date: String?) {
         self.imageUrl = imageUrl
         self.title = title
         self.shortDesc = shortDesc

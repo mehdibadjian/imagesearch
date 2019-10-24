@@ -21,8 +21,10 @@ extension UIScrollView {
     }
     func dismissEmptyListMessage() {
         if let `self` = self as? UITableView {
-            self.backgroundView = UIView()
-            self.separatorStyle = .singleLine
+            DispatchQueue.main.async {
+                self.backgroundView = UIView()
+                self.separatorStyle = .singleLine
+            }
         }
     }
 }
