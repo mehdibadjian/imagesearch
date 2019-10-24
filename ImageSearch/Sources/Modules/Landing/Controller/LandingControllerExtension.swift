@@ -44,6 +44,11 @@ extension LandingController: UITableViewDelegate, UITableViewDataSource {
             presentImage(imageUrl: result.imageUrl)
         }
     }
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == tableView.numberOfRows(inSection: 0) - 1 {
+            viewModel.nextPageQuery()
+        }
+    }
 }
 extension LandingController: UISearchBarDelegate {
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {

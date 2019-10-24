@@ -20,4 +20,10 @@ extension String {
     var htmlToString: String {
         return htmlToAttributedString?.string ?? ""
     }
+    var intValue: Int {
+        if let num = NumberFormatter().number(from: self) {
+            return num.intValue
+        }
+        return 1
+    }
 }

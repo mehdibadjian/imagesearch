@@ -10,6 +10,8 @@ class LandingViewModel: BaseViewModel {
     fileprivate var dataModel = [LandingModel]()
     fileprivate var searchHistoryModel = [String]()
     fileprivate var scrollView: UIScrollView!
+    fileprivate var pageNumber: Int = AppConstants.defaultPageNumber.intValue
+    fileprivate var queryString: String?
     fileprivate var loading: Bool = false {
         didSet {
             self.delegate?.loading(loading)
@@ -28,11 +30,12 @@ class LandingViewModel: BaseViewModel {
         }
         handleEmptyState()
     }
-    func onQuery(_ queryString: String, urlSession: URLSession? = nil) {
+    func onQuery(_ queryString: String, urlSession: URLSession? = nil, nextPage: Bool = false) {
         guard !loading, !queryString.isEmpty else {
             return
         }
-        if let storedData = LocalStorageManager.sharedInstance.getStoredValuesFor(key: queryString) as? Data {
+        self.queryString = queryString
+        if let storedData = LocalStorageManager.sharedInstance.getStoredValuesFor(key: queryString) as? Data, !nextPage {
             do {
                 let responseModel = try JSONDecoder().decode(QueryResponseModel.self, from: storedData)
                 dataModel = responseModel.value.map { LandingModel(imageUrl: $0.image?.thumbnail,
@@ -48,8 +51,13 @@ class LandingViewModel: BaseViewModel {
             return
         }
         loading = true
+        if nextPage {
+            pageNumber += 1
+        } else {
+            pageNumber = AppConstants.defaultPageNumber.intValue
+        }
         let query = Query(query: queryString,
-                          pageNumber: AppConstants.defaultPageNumber,
+                          pageNumber: pageNumber.stringValue,
                           pageSize: AppConstants.defaultPageSize)
         let queryService: SearchQueryService
         if let session = urlSession {
@@ -64,11 +72,19 @@ class LandingViewModel: BaseViewModel {
                     let jsonData = try JSONSerialization.data( withJSONObject: enquiry, options: .prettyPrinted)
                     LocalStorageManager.sharedInstance.storeValueFor(key: query.query, value: jsonData)
                     let responseModel = try JSONDecoder().decode(QueryResponseModel.self, from: jsonData)
-                    self.dataModel = responseModel.value.map {
-                        LandingModel(imageUrl: $0.image?.thumbnail,
-                                     title: $0.title?.htmlToString,
-                                     shortDesc: $0.provider?.name,
-                                     date: $0.datePublished) }
+                    if nextPage {
+                        self.dataModel.append(contentsOf:responseModel.value.map {
+                            LandingModel(imageUrl: $0.image?.thumbnail,
+                                         title: $0.title?.htmlToString,
+                                         shortDesc: $0.provider?.name,
+                                         date: $0.datePublished) })
+                    } else {
+                        self.dataModel = responseModel.value.map {
+                            LandingModel(imageUrl: $0.image?.thumbnail,
+                                         title: $0.title?.htmlToString,
+                                         shortDesc: $0.provider?.name,
+                                         date: $0.datePublished) }
+                    }
                     self.delegate?.onSuccess()
                     self.loading = false
                 } catch {
@@ -83,6 +99,12 @@ class LandingViewModel: BaseViewModel {
             self.loading = false
             self.delegate?.onFailure(error: error)
         })
+    }
+    func nextPageQuery() {
+        guard !getDataModel().isEmpty, let query = queryString, query.count != 0 else {
+            return
+        }
+        onQuery(query, nextPage: true)
     }
     func getDataModel() -> [Any] {
         if !dataModel.isEmpty {
