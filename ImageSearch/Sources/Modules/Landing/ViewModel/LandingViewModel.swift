@@ -44,7 +44,7 @@ class LandingViewModel: BaseViewModel {
                 do {
                     let jsonData = try JSONSerialization.data( withJSONObject: enquiry, options: .prettyPrinted)
                     let responseModel = try JSONDecoder().decode(QueryResponseModel.self, from: jsonData)
-                    self.dataModel = responseModel.value.map{ LandingModel(imageUrl: $0.image?.thumbnail, title: $0.title, shortDesc: $0.keywords, date: $0.datePublished) }
+                    self.dataModel = responseModel.value.map{ LandingModel(imageUrl: $0.image?.thumbnail, title: $0.title, shortDesc: $0.provider?.name, date: $0.datePublished) }
                     self.delegate?.onSuccess()
                     self.loading = false
                 } catch {
