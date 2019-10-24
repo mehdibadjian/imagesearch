@@ -110,6 +110,13 @@ class LandingViewModel: BaseViewModel {
         let model = dataModel[indexPath.row]
         return model.imageUrl
     }
+    func objectAtIndex(_ indexPath: IndexPath) -> Any {
+        if dataModel.indices.contains(indexPath.row) {
+            return dataModel[indexPath.row]
+        } else {
+            return searchHistoryModel[indexPath.row]
+        }
+    }
     func handleEmptyState() {
         if getDataModel().isEmpty {
             scrollView.showEmptyListMessage(emptyStateString)

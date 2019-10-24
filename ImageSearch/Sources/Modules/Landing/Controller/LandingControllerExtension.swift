@@ -38,7 +38,11 @@ extension LandingController: UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        presentImage(indexPath: indexPath)
+        if let history = viewModel.objectAtIndex(indexPath) as? String {
+            viewModel.onQuery(history)
+        } else if let result = viewModel.objectAtIndex(indexPath) as? LandingModel {
+            presentImage(imageUrl: result.imageUrl)
+        }
     }
 }
 extension LandingController: UISearchBarDelegate {
@@ -52,7 +56,7 @@ extension LandingController: UISearchBarDelegate {
     }
 }
 extension LandingController {
-    func presentImage(indexPath: IndexPath) {
+    func presentImage(imageUrl: String?) {
         let imageView = UIImageView(image: #imageLiteral(resourceName: "image-placeholder.jpg"))
         imageView.contentMode = .scaleAspectFit
         self.view.addSubview(imageView)
@@ -63,7 +67,7 @@ extension LandingController {
             NSLayoutConstraint(item: imageView, attribute: .centerX, relatedBy: .equal, toItem: self.view, attribute: .centerX, multiplier: 1.0, constant: 0),
             NSLayoutConstraint(item: imageView, attribute: .centerY, relatedBy: .equal, toItem: self.view, attribute: .centerY, multiplier: 1.0, constant: 0),
             ])
-        imageView.load(urlString: viewModel.imageForRow(indexPath), placeholder: #imageLiteral(resourceName: "image-placeholder.jpg"))
+        imageView.load(urlString: imageUrl, placeholder: #imageLiteral(resourceName: "image-placeholder.jpg"))
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(_:)))
         imageView.isUserInteractionEnabled = true
         imageView.addGestureRecognizer(tapGestureRecognizer)
