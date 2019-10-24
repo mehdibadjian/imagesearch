@@ -201,7 +201,6 @@
 		91CE094A2360A3EB00E93643 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				91CE09472360863300E93643 /* MockURLSession.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -237,6 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				91FB595E23607BE700311B97 /* Info.plist */,
+				91CE09472360863300E93643 /* MockURLSession.swift */,
 				91710F4B23615EA400917F5E /* ApiManagerTest */,
 				91710F4023613DD800917F5E /* LandingTests */,
 				91CE09492360866A00E93643 /* ServiceTests */,

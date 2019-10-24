@@ -35,12 +35,12 @@ class LandingViewModel: BaseViewModel {
         if let storedData = LocalStorageManager.sharedInstance.getStoredValuesFor(key: queryString) as? Data {
             do {
                 let responseModel = try JSONDecoder().decode(QueryResponseModel.self, from: storedData)
-                self.dataModel = responseModel.value.map{ LandingModel(imageUrl: $0.image?.thumbnail, title: $0.title, shortDesc: $0.provider?.name, date: $0.datePublished) }
-                self.delegate?.onSuccess()
-                self.loading = false
+                dataModel = responseModel.value.map{ LandingModel(imageUrl: $0.image?.thumbnail, title: $0.title, shortDesc: $0.provider?.name, date: $0.datePublished) }
+                delegate?.onSuccess()
+                loading = false
             } catch let error {
-                self.delegate?.onFailure(error: error)
-                self.loading = false
+                delegate?.onFailure(error: error)
+                loading = false
             }
             return
         }

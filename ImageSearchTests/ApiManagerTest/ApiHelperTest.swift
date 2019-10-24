@@ -8,10 +8,6 @@
 import XCTest
 @testable import ImageSearch
 class ApiHelperTest: XCTestCase {
-    override func setUp() {
-    }
-    override func tearDown() {
-    }
     func testApiHelper() {
         let query = Query(query: "test", pageNumber: AppConstants.defaultPageNumber, pageSize: AppConstants.defaultPageSize)
         XCTAssertNotNil(ApiManager.urlString(query))

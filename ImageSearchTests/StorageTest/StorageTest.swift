@@ -8,8 +8,6 @@
 import XCTest
 @testable import ImageSearch
 class StorageTest: XCTestCase {
-    override func setUp() {
-    }
     override func tearDown() {
         LocalStorageManager.sharedInstance.resetStorage(key: AppConstants.searchHistoryKey)
     }

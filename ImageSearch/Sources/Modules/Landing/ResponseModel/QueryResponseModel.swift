@@ -26,9 +26,8 @@ struct Value: Codable {
     let provider: Provider?
     let image: Image?
     enum CodingKeys: String, CodingKey {
-        case title, url
         case valueDescription = "description"
-        case keywords, language, isSafe, datePublished, provider, image
+        case title, url, keywords, language, isSafe, datePublished, provider, image
     }
 }
 // MARK: - Image
