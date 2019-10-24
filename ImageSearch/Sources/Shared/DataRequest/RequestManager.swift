@@ -6,7 +6,7 @@
 //
 import Foundation
 class RequestManager: NSObject {
-    var session: URLSession? = nil
+    var session: URLSession!
     static var defaultTimeoutInterval: TimeInterval = 30
     fileprivate func getRequest(_ url: URL, timeoutInterval: TimeInterval = RequestManager.defaultTimeoutInterval) -> NSMutableURLRequest {
         let theRequest = NSMutableURLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: timeoutInterval)

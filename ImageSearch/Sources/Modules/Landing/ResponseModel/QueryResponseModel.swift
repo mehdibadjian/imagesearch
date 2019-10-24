@@ -10,7 +10,6 @@ struct QueryResponseModel: Codable {
     let totalCount: Int
     let relatedSearch: [String]
     let value: [Value]
-    
     enum CodingKeys: String, CodingKey {
         case type = "_type"
         case didUMean, totalCount, relatedSearch, value
@@ -26,7 +25,6 @@ struct Value: Codable {
     let datePublished: String
     let provider: Provider
     let image: Image
-    
     enum CodingKeys: String, CodingKey {
         case title, url
         case valueDescription = "description"

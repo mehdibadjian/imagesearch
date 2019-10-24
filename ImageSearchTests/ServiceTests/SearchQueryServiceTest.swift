@@ -36,11 +36,8 @@ class SearchQueryServiceTest: XCTestCase {
     }
     func testEnquiryService() {
         var promise = expectation(description: "Request is not nill and has expected URL")
-        queryService?.enquiry( Query(query: "Test", pageNumber: "1", pageSize: "10"), successBlock: { (response) in
-            if let responseModel = response as? QueryResponseModel {
-                XCTAssertNotNil(responseModel)
-                XCTAssertEqual(responseModel.value.count,10)
-            }
+        queryService.enquiry( Query(query: "Test", pageNumber: "1", pageSize: "10"), successBlock: { (response) in
+            XCTAssertNotNil(response)
             self.fulfillBlock(&promise)
         }, failureBlock: { (_) in
             self.fulfillBlock(&promise)
