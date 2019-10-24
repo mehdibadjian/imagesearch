@@ -25,8 +25,6 @@ class LandingController: UIViewController {
         super.viewDidLoad()
         //To-Do:- use localization
         self.title = "Landing"
-        //update view model from local storage
-        viewModel.delegate = self
     }
     override func viewWillAppear(_ animated: Bool) {
         viewModel = LandingViewModel(self, scrollView: tableView)

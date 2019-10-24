@@ -16,6 +16,7 @@
 		91710F4A2361435F00917F5E /* LandingControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91710F492361435F00917F5E /* LandingControllerExtension.swift */; };
 		91710F4F23615EA400917F5E /* ApiHelperTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91710F4C23615EA400917F5E /* ApiHelperTest.swift */; };
 		91710F5023615EA400917F5E /* StorageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91710F4E23615EA400917F5E /* StorageTest.swift */; };
+		91710F562361637E00917F5E /* Landing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91710F552361637E00917F5E /* Landing.storyboard */; };
 		91CE09462360851B00E93643 /* SearchQueryServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CE09452360851B00E93643 /* SearchQueryServiceTest.swift */; };
 		91CE09482360863300E93643 /* MockURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CE09472360863300E93643 /* MockURLSession.swift */; };
 		91FB597423607C2600311B97 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FB596A23607C2500311B97 /* AppDelegate.swift */; };
@@ -55,6 +56,7 @@
 		91710F492361435F00917F5E /* LandingControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingControllerExtension.swift; sourceTree = "<group>"; };
 		91710F4C23615EA400917F5E /* ApiHelperTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiHelperTest.swift; sourceTree = "<group>"; };
 		91710F4E23615EA400917F5E /* StorageTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageTest.swift; sourceTree = "<group>"; };
+		91710F552361637E00917F5E /* Landing.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Landing.storyboard; sourceTree = "<group>"; };
 		91CE09452360851B00E93643 /* SearchQueryServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchQueryServiceTest.swift; sourceTree = "<group>"; };
 		91CE09472360863300E93643 /* MockURLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLSession.swift; sourceTree = "<group>"; };
 		91FB594423607BE500311B97 /* ImageSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -99,6 +101,7 @@
 		91710F372360A7AC00917F5E /* Landing */ = {
 			isa = PBXGroup;
 			children = (
+				91710F542361637300917F5E /* Resource */,
 				91710F462361432A00917F5E /* Controller */,
 				91710F432361418400917F5E /* Model */,
 				91710F3D2360B02500917F5E /* ViewModel */,
@@ -162,6 +165,14 @@
 				91710F4E23615EA400917F5E /* StorageTest.swift */,
 			);
 			path = StorageTest;
+			sourceTree = "<group>";
+		};
+		91710F542361637300917F5E /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				91710F552361637E00917F5E /* Landing.storyboard */,
+			);
+			path = Resource;
 			sourceTree = "<group>";
 		};
 		91CE09492360866A00E93643 /* ServiceTests */ = {
@@ -400,6 +411,7 @@
 			files = (
 				91FB597723607C2600311B97 /* Main.storyboard in Resources */,
 				91FB597523607C2600311B97 /* Assets.xcassets in Resources */,
+				91710F562361637E00917F5E /* Landing.storyboard in Resources */,
 				91FB597623607C2600311B97 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

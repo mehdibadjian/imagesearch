@@ -53,8 +53,12 @@ class LandingViewModel: BaseViewModel {
             self.delegate?.onFailure(error: error)
         }
     }
-    func getDataModel() -> [LandingModel] {
-        return dataModel
+    func getDataModel() -> [Any] {
+        if !dataModel.isEmpty {
+            return dataModel
+        } else {
+            return searchHistoryModel
+        }
     }
     func numberOfRows() -> Int {
         return dataModel.count
