@@ -19,6 +19,7 @@ extension UIScrollView {
             self.separatorStyle = .none
         }
     }
+    //TODO: UI test
     func dismissEmptyListMessage() {
         if let `self` = self as? UITableView {
             DispatchQueue.main.async {

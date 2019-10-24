@@ -7,6 +7,7 @@
 //
 import Foundation
 extension Int {
+    //TODO: Unit test
     var stringValue: String {
         return String(self)
     }

@@ -8,6 +8,7 @@ import UIKit
 import Foundation
 import SnapKit
 extension UIView {
+    //TODO: UI test
     func showLoader() {
         let loaderContainer = self.subviews.filter({ $0.tag == AppConstants.loaderTag })
         if !loaderContainer.isEmpty {

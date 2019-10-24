@@ -17,6 +17,7 @@ class RequestManager: NSObject {
         theRequest.httpMethod = "GET"
         return theRequest
     }
+    //TODO: Unit test
     fileprivate func session(_ url: URL) -> URLSession {
         let config = URLSessionConfiguration.default
         config.requestCachePolicy = .reloadIgnoringLocalCacheData
@@ -68,6 +69,7 @@ class RequestManager: NSObject {
     }
 }
 extension RequestManager: URLSessionTaskDelegate {
+    //TODO: Unit test
     public func urlSession(_ session: URLSession,
                            didReceive challenge: URLAuthenticationChallenge,
                            completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Swift.Void) {

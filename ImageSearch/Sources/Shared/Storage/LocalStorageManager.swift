@@ -15,6 +15,7 @@ class LocalStorageManager {
             return nil
         }
     }
+    //TODO: Unit test
     func getAllStoredData() -> NSDictionary? {
         if let searchHistory = defaults.value(forKey: AppConstants.searchHistoryKey) as? NSDictionary {
             return searchHistory
@@ -22,6 +23,7 @@ class LocalStorageManager {
             return nil
         }
     }
+    //TODO: Unit test
     func storeValueFor(key: String, value: Data) {
         if var searchHistory = defaults.value(forKey: AppConstants.searchHistoryKey) as? [AnyHashable: Any], searchHistory.keys.contains(key) {
             searchHistory.updateValue(value, forKey: key)

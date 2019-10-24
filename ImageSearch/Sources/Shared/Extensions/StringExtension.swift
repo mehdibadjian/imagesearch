@@ -6,9 +6,7 @@
 //
 import Foundation
 extension String {
-    var urlCompatible: String {
-        return self.lowercased().replacingOccurrences(of: " ", with: "+")
-    }
+    //TODO: Unit test
     fileprivate var htmlToAttributedString: NSAttributedString? {
         guard let data = data(using: .utf8) else { return NSAttributedString() }
         do {

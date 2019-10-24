@@ -12,6 +12,7 @@ class LandingViewModel: BaseViewModel {
     fileprivate var scrollView: UIScrollView!
     fileprivate var pageNumber: Int = AppConstants.defaultPageNumber.intValue
     fileprivate var queryString: String?
+    //TODO: Unit test
     fileprivate var loading: Bool = false {
         didSet {
             self.delegate?.loading(loading)
@@ -31,10 +32,12 @@ class LandingViewModel: BaseViewModel {
         handleEmptyState()
     }
     func onQuery(_ queryString: String, urlSession: URLSession? = nil, nextPage: Bool = false) {
+        //TODO: Unit test
         guard !loading, !queryString.isEmpty else {
             return
         }
         self.queryString = queryString
+        //TODO: Unit test
         if let storedData = LocalStorageManager.sharedInstance.getStoredValuesFor(key: queryString) as? Data, !nextPage {
             do {
                 let responseModel = try JSONDecoder().decode(QueryResponseModel.self, from: storedData)
@@ -51,6 +54,7 @@ class LandingViewModel: BaseViewModel {
             return
         }
         loading = true
+        //TODO: Unit test
         if nextPage {
             pageNumber += 1
         } else {
@@ -60,6 +64,7 @@ class LandingViewModel: BaseViewModel {
                           pageNumber: pageNumber.stringValue,
                           pageSize: AppConstants.defaultPageSize)
         let queryService: SearchQueryService
+        //TODO: Unit test
         if let session = urlSession {
             queryService = SearchQueryService(session)
         } else {
@@ -100,12 +105,14 @@ class LandingViewModel: BaseViewModel {
             self.delegate?.onFailure(error: error)
         })
     }
+    //TODO: Unit test
     func nextPageQuery() {
         guard !getDataModel().isEmpty, let query = queryString, query.count != 0 else {
             return
         }
         onQuery(query, nextPage: true)
     }
+    //TODO: Unit test
     func getDataModel() -> [Any] {
         if !dataModel.isEmpty {
             return dataModel
@@ -116,6 +123,7 @@ class LandingViewModel: BaseViewModel {
     func numberOfRows() -> Int {
         return getDataModel().count
     }
+    //TODO: Unit test
     func cellForRow(cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let tableView = scrollView as? UITableView {
             if !dataModel.isEmpty {

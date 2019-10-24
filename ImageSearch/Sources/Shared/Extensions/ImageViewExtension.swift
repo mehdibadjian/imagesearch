@@ -6,6 +6,7 @@
 //
 import UIKit
 extension UIImageView {
+    //TODO: Unit test
     func load(urlString: String?, placeholder: UIImage? = nil, cache: URLCache? = nil) {
         if let urlString = urlString, let url = URL.init(string: urlString) {
             let cache = cache ?? URLCache.shared
